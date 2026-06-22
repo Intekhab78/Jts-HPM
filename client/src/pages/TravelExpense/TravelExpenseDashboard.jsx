@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getBaseUrl } from '../../api/config';
 import { useAuth } from '../../context/AuthContext';
 import { getTravels, createTravel, updateTravelStatus, uploadAdvanceDocument, deleteTravel } from '../../api/travelApi';
 import { getExpenses, createExpense, updateExpenseStatus, uploadExpenseReceipt, getSettlements, createSettlement, updateSettlementDraft, updateSettlementStatus, uploadSettlementReceipt } from '../../api/expenseApi';
@@ -394,7 +395,7 @@ export default function TravelExpenseDashboard() {
                                             </td>
                                             <td>
                                                 {t.advanceDocumentUrl ? (
-                                                    <a href={`http://localhost:5000${t.advanceDocumentUrl}`} target="_blank" rel="noreferrer" style={{ fontSize: '0.8rem', color: 'var(--primary-color)' }}>View</a>
+                                                    <a href={`${getBaseUrl()}${t.advanceDocumentUrl}`} target="_blank" rel="noreferrer" style={{ fontSize: '0.8rem', color: 'var(--primary-color)' }}>View</a>
                                                 ) : '-'}
                                             </td>
                                             <td>
@@ -497,7 +498,7 @@ export default function TravelExpenseDashboard() {
                                             <td style={{ fontWeight: 'bold' }}>AED {e.amount}</td>
                                             <td>
                                                 {e.receiptUrl ? (
-                                                    <a href={`http://localhost:5000${e.receiptUrl}`} target="_blank" rel="noreferrer" style={{ color: 'var(--primary-color)' }}>View</a>
+                                                    <a href={`${getBaseUrl()}${e.receiptUrl}`} target="_blank" rel="noreferrer" style={{ color: 'var(--primary-color)' }}>View</a>
                                                 ) : <span style={{ color: 'var(--text-muted)' }}>None</span>}
                                             </td>
                                             <td>
@@ -578,7 +579,7 @@ export default function TravelExpenseDashboard() {
                                             <div>
                                                 <label className="form-label">Receipt</label>
                                                 <input type="file" className="form-control" accept="image/*,.pdf" onChange={e => handleSettlementChange(index, 'receipt', e.target.files[0])} />
-                                                {typeof exp.receipt === 'string' && <a href={`http://localhost:5000${exp.receipt}`} target="_blank" rel="noreferrer" style={{ fontSize: '0.8rem', display: 'block', marginTop: '0.2rem' }}>View Saved</a>}
+                                                {typeof exp.receipt === 'string' && <a href={`${getBaseUrl()}${exp.receipt}`} target="_blank" rel="noreferrer" style={{ fontSize: '0.8rem', display: 'block', marginTop: '0.2rem' }}>View Saved</a>}
                                             </div>
                                             <div>
                                                 {settlementForm.expenses.length > 1 && (
@@ -703,7 +704,7 @@ export default function TravelExpenseDashboard() {
                                             </td>
                                             <td style={{ fontWeight: 'bold' }}>AED {line.amount}</td>
                                             <td>
-                                                {line.receiptUrl ? <a href={`http://localhost:5000${line.receiptUrl}`} target="_blank" rel="noreferrer">View</a> : 'None'}
+                                                {line.receiptUrl ? <a href={`${getBaseUrl()}${line.receiptUrl}`} target="_blank" rel="noreferrer">View</a> : 'None'}
                                             </td>
                                             <td>
                                                 <select className="form-control" style={{ padding: '0.3rem', fontSize: '0.9rem' }} value={line.status} onChange={(e) => handleLineItemChange(idx, 'status', e.target.value)}>

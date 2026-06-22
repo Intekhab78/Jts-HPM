@@ -1,5 +1,6 @@
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { getBaseUrl } from '../../api/config';
 import { HiOutlineArrowRightOnRectangle, HiOutlineBell } from 'react-icons/hi2';
 import toast from 'react-hot-toast';
 import './Navbar.css';
@@ -35,7 +36,7 @@ export default function Navbar() {
                         const photo = user?.profilePhoto || user?.employeeRef?.profilePhoto; return (
                             <div className="navbar-avatar" style={{ overflow: 'hidden', background: photo ? 'transparent' : 'linear-gradient(135deg, var(--primary-500), var(--primary-700))', padding: photo ? 0 : '', border: photo ? '2px solid var(--primary-500)' : 'none' }}>
                                 {photo ? (
-                                    <img src={`${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${photo}`} alt="User" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    <img src={`${getBaseUrl()}${photo}`} alt="User" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                 ) : (
                                     <>{user?.name?.charAt(0) || 'U'}</>
                                 )}

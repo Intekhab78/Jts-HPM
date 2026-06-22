@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { getBaseUrl } from '../../api/config';
 import {
     HiOutlineHome,
     HiOutlineUserGroup,
@@ -104,7 +105,7 @@ export default function Sidebar() {
                             const photo = user?.profilePhoto || user?.employeeRef?.profilePhoto; return (
                                 <div className="sidebar-avatar" style={{ overflow: 'hidden', background: photo ? 'transparent' : 'linear-gradient(135deg, var(--accent-500), var(--accent-700))', padding: photo ? 0 : '', border: photo ? '2px solid var(--accent-500)' : 'none' }}>
                                     {photo ? (
-                                        <img src={`${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${photo}`} alt="User" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        <img src={`${getBaseUrl()}${photo}`} alt="User" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     ) : (
                                         <>{user?.name?.charAt(0) || 'U'}</>
                                     )}

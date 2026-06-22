@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getBaseUrl } from '../../api/config';
 import { getAttendance, lockAttendance, approveAttendance, deleteAttendance } from '../../api/attendanceApi';
 import { getEmployees } from '../../api/employeeApi';
 import { useAuth } from '../../context/AuthContext';
@@ -261,7 +262,7 @@ export default function AttendanceDashboard() {
                                                 <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '4px' }}>
                                                     <span>{record.source} {record.isLocked && '🔒'}</span>
                                                     {record.isRequestPending && <span className="badge badge-warning" style={{ fontSize: '0.65rem' }}>{record.requestType} Pending</span>}
-                                                    {record.punchInPhoto && <a href={`${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${record.punchInPhoto}`} target="_blank" rel="noreferrer" title="View Punch In Photo">📸</a>}
+                                                    {record.punchInPhoto && <a href={`${getBaseUrl()}${record.punchInPhoto}`} target="_blank" rel="noreferrer" title="View Punch In Photo">📸</a>}
                                                     {record.punchInLocation?.lat && <a href={`https://maps.google.com/?q=${record.punchInLocation.lat},${record.punchInLocation.lng}`} target="_blank" rel="noreferrer" title={`Lat: ${record.punchInLocation.lat}, Lng: ${record.punchInLocation.lng}`}>📍</a>}
                                                 </div>
                                                 {record.isRequestPending && (userRole === 'admin' || userRole === 'hr' || isManager) && (

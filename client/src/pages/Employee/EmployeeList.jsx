@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getBaseUrl } from '../../api/config';
 import { useAuth } from '../../context/AuthContext';
 import { getEmployees, deleteEmployee } from '../../api/employeeApi';
 import toast from 'react-hot-toast';
@@ -101,7 +102,7 @@ export default function EmployeeList() {
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                                     <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: emp.profilePhoto ? 'transparent' : 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', overflow: 'hidden', flexShrink: 0, fontSize: '0.8rem' }}>
                                                         {emp.profilePhoto ? (
-                                                            <img src={`${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${emp.profilePhoto}`} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                                            <img src={`${getBaseUrl()}${emp.profilePhoto}`} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                                         ) : (
                                                             <>{emp.firstName.charAt(0)}{emp.lastName.charAt(0)}</>
                                                         )}

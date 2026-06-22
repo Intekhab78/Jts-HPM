@@ -1,16 +1,15 @@
 import axios from 'axios';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+import { getApiUrl } from './config';
 
 const api = axios.create({
-    baseURL: API_BASE_URL,
     headers: { 'Content-Type': 'application/json' },
     withCredentials: true,
 });
 
-// Request interceptor — attach JWT
+// Request interceptor — attach JWT and set dynamic baseURL
 api.interceptors.request.use(
     (config) => {
+        config.baseURL = getApiUrl();
         const token = localStorage.getItem('accessToken');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
@@ -32,7 +31,7 @@ api.interceptors.response.use(
                 const refreshToken = localStorage.getItem('refreshToken');
                 if (!refreshToken) throw new Error('No refresh token');
 
-                const { data } = await axios.post(`${API_BASE_URL}/auth/refresh`, { refreshToken });
+                const { data } = await axios.post(`${getApiUrl()}/auth/refresh`, { refreshToken });
                 localStorage.setItem('accessToken', data.data.accessToken);
                 localStorage.setItem('refreshToken', data.data.refreshToken);
                 originalRequest.headers.Authorization = `Bearer ${data.data.accessToken}`;

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
+import { getBaseUrl } from '../../api/config';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 import { punchInOut } from '../../api/attendanceApi';
@@ -84,7 +85,7 @@ export default function WebcamPunch({ onPunchSuccess }) {
             }
 
             // Load reference image and extract descriptor
-            const imgUrl = `${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${user.profilePhoto}`;
+            const imgUrl = `${getBaseUrl()}${user.profilePhoto}`;
             const imgRes = await fetch(imgUrl);
             const blob = await imgRes.blob();
             const image = await api.bufferToImage(blob);

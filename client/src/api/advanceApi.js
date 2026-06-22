@@ -1,11 +1,18 @@
 import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+import { getApiUrl } from './config';
 
 const api = axios.create({
-    baseURL: API_URL,
     withCredentials: true,
 });
+
+api.interceptors.request.use(
+    (config) => {
+        config.baseURL = getApiUrl();
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
 
 export const getAdvances = () => api.get('/advances').then(res => res.data);
 export const createAdvance = (data) => api.post('/advances', data).then(res => res.data);

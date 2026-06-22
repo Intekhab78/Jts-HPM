@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getBaseUrl } from '../../api/config';
 import { useAuth } from '../../context/AuthContext';
 import { getEmployeeById, createEmployee, updateEmployee, generateEmployeeId, uploadDocuments, getEmployees } from '../../api/employeeApi';
 import { getPayElements } from '../../api/payElementApi';
@@ -235,7 +236,7 @@ export default function EmployeeForm() {
                                 {files.profilePhoto ? (
                                     <img src={URL.createObjectURL(files.profilePhoto)} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                 ) : formData.profilePhoto ? (
-                                    <img src={`${(import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '')}${formData.profilePhoto}`} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    <img src={`${getBaseUrl()}${formData.profilePhoto}`} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                 ) : (
                                     <span>{formData.firstName ? formData.firstName.charAt(0) : 'U'}</span>
                                 )}

@@ -1,11 +1,10 @@
-import axios from 'axios';
-
-const API_URL = '/api/leave-settings';
+import api from './index';
 
 export const getLeaveSettings = async () => {
-    return await axios.get(API_URL);
+    return await api.get('/leave-settings');
 };
 
 export const updateLeaveSettings = async (settingsData) => {
-    return await axios.put(API_URL, settingsData);
+    return await api.put('/leave-settings', settingsData);
 };
+

@@ -12,11 +12,38 @@ const seedUsers = [
     { name: 'Ahmed Employee', email: 'employee@hrpayroll.com', password: 'employee123', role: 'employee' },
     { name: 'Director User', email: 'director@hrpayroll.com', password: 'director123', role: 'director' },
 ];
+const Role = require('./models/Role');
 
 async function seed() {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
         console.log('MongoDB connected...');
+
+        // Ensure roles exist
+        const roleNames = ['admin', 'hr', 'manager', 'finance', 'employee', 'director'];
+        const roleMap = {};
+
+        for (const name of roleNames) {
+            let role = await Role.findOne({ name });
+            if (!role) {
+                const perms = name === 'admin' ? [
+                    { module: 'employees', actions: { view: true, modify: true, delete: true, approve: true } },
+                    { module: 'leaves', actions: { view: true, modify: true, delete: true, approve: true } },
+                    { module: 'payroll', actions: { view: true, modify: true, delete: true, approve: true } },
+                    { module: 'attendance', actions: { view: true, modify: true, delete: true, approve: true } },
+                    { module: 'roles', actions: { view: true, modify: true, delete: true, approve: true } },
+                    { module: 'appraisal', actions: { view: true, modify: true, delete: true, approve: true } },
+                    { module: 'travel', actions: { view: true, modify: true, delete: true, approve: true } }
+                ] : [];
+                role = await Role.create({
+                    name,
+                    isSystem: name === 'admin',
+                    permissions: perms
+                });
+                console.log(`Created role: ${name}`);
+            }
+            roleMap[name] = role._id;
+        }
 
         // Clear existing users
         await User.deleteMany({});
@@ -24,8 +51,15 @@ async function seed() {
 
         // Create users
         for (const userData of seedUsers) {
-            const user = await User.create(userData);
-            console.log(`Created: ${user.email} (${user.role}) — Password: ${userData.password}`);
+            const roleId = roleMap[userData.role];
+            if (!roleId) {
+                throw new Error(`Role not found: ${userData.role}`);
+            }
+            const user = await User.create({
+                ...userData,
+                role: roleId
+            });
+            console.log(`Created: ${user.email} (${userData.role}) — Password: ${userData.password}`);
         }
 
         console.log('\n✅ Seed complete! You can now login with any of the above credentials.');

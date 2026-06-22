@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getBaseUrl } from '../../api/config';
 import { useAuth } from '../../context/AuthContext';
 import { getPayrolls, generatePayroll, updatePayrollStatus, downloadSIF, getPayslipUrl, freezePayroll as freezePayrollApi, unfreezePayroll as unfreezePayrollApi } from '../../api/payrollApi';
 import toast from 'react-hot-toast';
@@ -77,7 +78,7 @@ export default function PayrollDashboard() {
 
             // In a real app we'd construct a full URL, but Vite proxies it
             // or we use window.location.origin + ...
-            const url = `http://localhost:5000${res.data.downloadUrl}`;
+            const url = `${getBaseUrl()}${res.data.downloadUrl}`;
             window.open(url, '_blank');
         } catch (error) {
             toast.error(error.response?.data?.message || 'Failed to generate SIF');
@@ -90,7 +91,7 @@ export default function PayrollDashboard() {
             const res = await getPayslipUrl(id);
             toast.success('Payslip ready', { id: toastId });
 
-            const url = `http://localhost:5000${res.data.downloadUrl}`;
+            const url = `${getBaseUrl()}${res.data.downloadUrl}`;
             window.open(url, '_blank');
         } catch (error) {
             toast.error('Failed to generate payslip');

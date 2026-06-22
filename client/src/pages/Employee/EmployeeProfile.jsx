@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { getBaseUrl } from '../../api/config';
 import { getEmployeeById, confirmEmployeeProbation } from '../../api/employeeApi';
 import { authAPI } from '../../api';
 import { useAuth } from '../../context/AuthContext';
@@ -20,7 +21,7 @@ export default function EmployeeProfile() {
     const [passwordData, setPasswordData] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
     const [changingPassword, setChangingPassword] = useState(false);
 
-    const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '');
+    const API_URL = getBaseUrl();
 
     useEffect(() => {
         fetchEmployee();
