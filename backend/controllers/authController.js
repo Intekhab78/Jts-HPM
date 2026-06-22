@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Employee = require('../models/Employee');
+const Role = require('../models/Role');
 
 // Generate tokens
 const generateTokens = (userId) => {
@@ -26,7 +27,26 @@ exports.register = async (req, res, next) => {
             return res.status(400).json({ success: false, message: 'Email already registered' });
         }
 
-        const user = await User.create({ name, email, password, role: role || 'employee' });
+        let roleId = role;
+        // If role is a string (e.g. 'employee', 'admin'), look up its ObjectId in the database
+        if (typeof role === 'string' && role.length < 24) {
+            const roleDoc = await Role.findOne({ name: role.toLowerCase().trim() });
+            if (roleDoc) {
+                roleId = roleDoc._id;
+            } else {
+                return res.status(400).json({ success: false, message: `Role '${role}' not found` });
+            }
+        } else if (!role) {
+            // Default to 'employee'
+            const roleDoc = await Role.findOne({ name: 'employee' });
+            if (roleDoc) {
+                roleId = roleDoc._id;
+            } else {
+                return res.status(400).json({ success: false, message: "Default 'employee' role not found in database" });
+            }
+        }
+
+        const user = await User.create({ name, email, password, role: roleId });
 
         const { accessToken, refreshToken } = generateTokens(user._id);
 

@@ -10,7 +10,7 @@ exports.getEmployees = async (req, res, next) => {
         const userRole = req.user.role?.name || req.user.role;
         const employeeRefId = req.user.employeeRef;
 
-        if (userRole !== 'admin' && userRole !== 'hr') {
+        if (userRole !== 'admin' && userRole !== 'hr' && userRole !== 'director' && userRole !== 'finance') {
             // Find if this user manages anyone
             const subordinates = await Employee.find({ manager: employeeRefId }).select('_id');
 

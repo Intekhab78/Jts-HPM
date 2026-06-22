@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 
 export default function LeaveDashboard() {
     const { user } = useAuth();
+    const userRole = typeof user?.role === 'string' ? user.role : user?.role?.name;
     const [balances, setBalances] = useState(null);
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -79,7 +80,7 @@ export default function LeaveDashboard() {
                             <span className="btn-icon">💰</span> Encash Leave
                         </button>
                     )}
-                    {(user.role === 'manager' || user.role === 'hr' || user.role === 'admin' || user.role === 'director') && (
+                    {['manager', 'hr', 'admin', 'director'].includes(userRole) && (
                         <Link to="/leaves/team" className="btn btn-secondary btn-outline">Team Leaves</Link>
                     )}
                     <Link to="/leaves/apply" className="btn btn-primary">

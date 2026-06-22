@@ -19,7 +19,7 @@ router.use(protect);
 router.get('/generate-id', authorize('hr', 'admin'), generateEmployeeId);
 
 router.route('/')
-    .get(authorize('hr', 'admin', 'manager', 'director'), getEmployees)
+    .get(authorize('hr', 'admin', 'manager', 'director', 'finance'), getEmployees)
     .post(authorize('hr', 'admin'), createEmployee);
 
 router.route('/:id')

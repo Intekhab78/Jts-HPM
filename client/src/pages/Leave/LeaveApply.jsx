@@ -16,7 +16,7 @@ export default function LeaveApply() {
         fromDate: '',
         toDate: '',
         reason: '',
-        employee: '',
+        employee: user?.employeeRef || '',
         encashmentDays: '' // Used when type is Encashment
     });
 
@@ -24,6 +24,7 @@ export default function LeaveApply() {
 
     useEffect(() => {
         if (user && user.employeeRef) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setFormData(prev => ({ ...prev, employee: user.employeeRef }));
         }
 

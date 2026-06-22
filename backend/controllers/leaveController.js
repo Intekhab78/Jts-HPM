@@ -10,8 +10,8 @@ exports.getAllLeaves = async (req, res, next) => {
         let query = {};
         const role = req.user.role?.name || req.user.role;
 
-        // If not admin or hr, strict filter to subordinates only
-        if (role !== 'admin' && role !== 'hr' && role !== 'director') {
+        // If not admin, hr, director, or finance, strict filter to subordinates only
+        if (role !== 'admin' && role !== 'hr' && role !== 'director' && role !== 'finance') {
             const myEmployees = await Employee.find({ manager: req.user.employeeRef }).select('_id');
             const empIds = myEmployees.map(e => e._id);
             query = { employee: { $in: empIds } };

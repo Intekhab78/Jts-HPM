@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 
 export default function AdvanceDashboard() {
     const { user } = useAuth();
+    const userRole = typeof user?.role === 'string' ? user.role : user?.role?.name;
     const [advances, setAdvances] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
@@ -60,7 +61,7 @@ export default function AdvanceDashboard() {
                     <h1 className="page-title">Salary Advances</h1>
                     <p className="page-subtitle">Request emergency funds and track EMI payroll deductions</p>
                 </div>
-                {user.role === 'employee' && (
+                {userRole === 'employee' && (
                     <button onClick={() => setShowForm(!showForm)} className="btn btn-primary" style={{ background: '#f59e0b', borderColor: '#f59e0b', color: '#111827' }}>
                         + Request Advance
                     </button>
@@ -112,7 +113,7 @@ export default function AdvanceDashboard() {
                     <table className="table">
                         <thead>
                             <tr>
-                                {user.role !== 'employee' && <th>Employee</th>}
+                                {userRole !== 'employee' && <th>Employee</th>}
                                 <th>Reason</th>
                                 <th>Total Amount</th>
                                 <th>EMI Plan</th>
@@ -124,7 +125,7 @@ export default function AdvanceDashboard() {
                         <tbody>
                             {advances.map(a => (
                                 <tr key={a._id}>
-                                    {user.role !== 'employee' && <td>{a.employee?.firstName} {a.employee?.lastName}</td>}
+                                    {userRole !== 'employee' && <td>{a.employee?.firstName} {a.employee?.lastName}</td>}
                                     <td>
                                         <div style={{ fontWeight: '500' }}>{a.reason}</div>
                                         <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{new Date(a.requestDate).toLocaleDateString()}</div>
@@ -157,7 +158,7 @@ export default function AdvanceDashboard() {
                                         </span>
                                     </td>
                                     <td>
-                                        {a.status === 'Pending' && ['hr', 'admin', 'finance'].includes(user.role) && (
+                                        {a.status === 'Pending' && ['hr', 'admin', 'finance'].includes(userRole) && (
                                             <div style={{ display: 'flex', gap: '0.5rem' }}>
                                                 <button onClick={() => handleDisburse(a._id)} className="btn btn-primary" style={{ padding: '0.2rem 0.5rem', fontSize: '0.8rem', background: '#f59e0b', borderColor: '#f59e0b', color: '#111827' }} title="Approve and transfer funds">
                                                     Disburse Funds

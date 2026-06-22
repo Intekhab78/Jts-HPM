@@ -17,6 +17,7 @@ import './Dashboard.css';
 
 export default function Dashboard() {
     const { user } = useAuth();
+    const userRole = typeof user?.role === 'string' ? user.role : user?.role?.name;
     const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState({
         totalEmployees: 0,
@@ -33,12 +34,12 @@ export default function Dashboard() {
     });
 
     useEffect(() => {
-        if (user.role === 'employee') {
+        if (userRole === 'employee') {
             fetchEmployeeStats();
         } else {
             fetchAdminStats();
         }
-    }, [user]);
+    }, [user, userRole]);
 
     const fetchAdminStats = async () => {
         try {
@@ -105,7 +106,7 @@ export default function Dashboard() {
         return <div className="page-loader"><div className="loader"></div></div>;
     }
 
-    if (user.role === 'employee') {
+    if (userRole === 'employee') {
         return (
             <div className="dashboard">
                 <div className="page-header" style={{ marginBottom: '2rem' }}>
@@ -172,8 +173,6 @@ export default function Dashboard() {
             </div>
         );
     }
-
-    const userRole = typeof user?.role === 'string' ? user.role : user?.role?.name;
 
     // Admin / HR / Manager / Finance Dashboard
     return (

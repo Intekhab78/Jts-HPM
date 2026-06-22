@@ -23,8 +23,10 @@ export default function AttendanceDashboard() {
     });
 
     useEffect(() => {
-        fetchEmployees();
-    }, []);
+        if (userRole === 'admin' || userRole === 'hr' || isManager) {
+            fetchEmployees();
+        }
+    }, [userRole, isManager]);
 
     useEffect(() => {
         fetchAttendance();

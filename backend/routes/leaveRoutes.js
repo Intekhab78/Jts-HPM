@@ -15,7 +15,7 @@ const {
 router.use(protect);
 
 router.route('/')
-    .get(authorize('hr', 'admin', 'manager', 'director', 'employee'), getAllLeaves)
+    .get(authorize('hr', 'admin', 'manager', 'director', 'finance', 'employee'), getAllLeaves)
     .post(applyForLeave);
 
 router.get('/employee/:employeeId', getEmployeeLeaves);
