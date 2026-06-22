@@ -14,7 +14,24 @@ export function getBaseUrl() {
 export async function initBackendUrl() {
     if (isInitialized) return;
 
+    const hostname = window.location.hostname;
+    const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.');
+
     const envApiUrl = import.meta.env.VITE_API_URL;
+
+    // If we are in production (not loading from localhost), use remote API directly without health-checks
+    if (!isLocalhost) {
+        if (envApiUrl && !envApiUrl.includes('localhost') && !envApiUrl.includes('127.0.0.1')) {
+            apiBaseUrl = envApiUrl;
+            baseUrl = envApiUrl.replace('/api', '');
+        } else {
+            apiBaseUrl = 'https://hcm.jtsonline.shop/api';
+            baseUrl = 'https://hcm.jtsonline.shop';
+        }
+        isInitialized = true;
+        return;
+    }
+
     // If VITE_API_URL is configured and is not pointing to localhost, respect it directly without checks
     if (envApiUrl && !envApiUrl.includes('localhost') && !envApiUrl.includes('127.0.0.1')) {
         apiBaseUrl = envApiUrl;
