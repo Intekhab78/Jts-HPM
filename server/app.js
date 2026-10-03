@@ -17,11 +17,23 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" }
-}));
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://hcm.jtsmiddleeast.com',
+    'https://hcm.jtsonline.shop',
+    process.env.CLIENT_URL
+].filter(Boolean);
+
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:5174', process.env.CLIENT_URL],
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps, curl, Postman)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin) || origin.includes('jtsmiddleeast.com') || origin.includes('jtsonline.shop')) {
+            return callback(null, true);
+        }
+        return callback(null, true); // Allow all valid origins
+    },
     credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));

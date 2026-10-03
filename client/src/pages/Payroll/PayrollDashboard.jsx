@@ -67,15 +67,15 @@ export default function PayrollDashboard() {
         }
     };
 
+    const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace('/api', '');
+
     const handleDownloadSif = async () => {
         try {
             const toastId = toast.loading('Generating SIF format...');
             const res = await downloadSIF(filters.year, filters.month);
             toast.success('SIF generated', { id: toastId });
 
-            // In a real app we'd construct a full URL, but Vite proxies it
-            // or we use window.location.origin + ...
-            const url = `http://localhost:5000${res.data.downloadUrl}`;
+            const url = `${API_BASE}${res.data.downloadUrl}`;
             window.open(url, '_blank');
         } catch (error) {
             toast.error(error.response?.data?.message || 'Failed to generate SIF');
@@ -88,7 +88,7 @@ export default function PayrollDashboard() {
             const res = await getPayslipUrl(id);
             toast.success('Payslip ready', { id: toastId });
 
-            const url = `http://localhost:5000${res.data.downloadUrl}`;
+            const url = `${API_BASE}${res.data.downloadUrl}`;
             window.open(url, '_blank');
         } catch (error) {
             toast.error('Failed to generate payslip');
