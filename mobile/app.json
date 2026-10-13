@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "HR Payroll Biometric Kiosk",
+    "slug": "hrpayroll-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jtsgroup.hrpayroll"
+    },
+    "android": {
+      "package": "com.jtsgroup.hrpayroll",
+      "usesCleartextTraffic": true,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow this app to access the camera for face recognition and QR scanning."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysPermission": "Allow this app to access your location for geofencing check-ins.",
+          "locationWhenInUsePermission": "Allow this app to access your location for geofencing check-ins."
+        }
+      ],
+      "@react-native-community/datetimepicker"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a12e5da6-be74-4540-aed1-fee9be80336e"
+      }
+    },
+    "owner": "jts-me"
+  }
+}

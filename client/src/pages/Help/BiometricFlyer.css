@@ -1,0 +1,324 @@
+/* 1-Page Biometric Complete Process & Marketing Flyer Styles */
+.biometric-flyer-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    background: var(--bg-primary, #0f172a);
+    color: var(--text-primary, #f8fafc);
+    border-radius: 16px;
+    border: 1px solid var(--border-color, #334155);
+    overflow: hidden;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.flyer-action-bar {
+    padding: 1rem 1.5rem;
+    background: var(--bg-secondary, #1e293b);
+    border-bottom: 1px solid var(--border-color, #334155);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.flyer-badge-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2));
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #10b981;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.flyer-content-a4 {
+    padding: 2.5rem;
+    background: #0f172a;
+    color: #f8fafc;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.flyer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #334155;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.flyer-brand-title {
+    font-size: 1.85rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 0.25rem 0;
+}
+
+.flyer-brand-subtitle {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    margin: 0;
+    font-weight: 500;
+}
+
+.flyer-brand-badge {
+    text-align: right;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid #475569;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+}
+
+.flyer-hero-banner {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(88, 28, 135, 0.3));
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.flyer-hero-text h2 {
+    font-size: 1.35rem;
+    margin: 0 0 0.5rem 0;
+    color: #60a5fa;
+    font-weight: 800;
+}
+
+.flyer-hero-text p {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.flyer-metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.flyer-metric-box {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.flyer-metric-val {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #38bdf8;
+    margin-bottom: 0.25rem;
+}
+
+.flyer-metric-lbl {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.flyer-process-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.flyer-process-card {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 1.25rem;
+    position: relative;
+}
+
+.flyer-step-number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flyer-process-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+}
+
+.flyer-process-card h4 {
+    font-size: 1.05rem;
+    margin: 0 0 0.4rem 0;
+    color: #f1f5f9;
+    font-weight: 700;
+}
+
+.flyer-process-card p {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.flyer-features-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.flyer-feature-block {
+    background: #1e293b;
+    border-left: 3px solid #3b82f6;
+    border-radius: 0 8px 8px 0;
+    padding: 0.85rem 1rem;
+}
+
+.flyer-feature-block h5 {
+    font-size: 0.85rem;
+    margin: 0 0 0.3rem 0;
+    color: #60a5fa;
+    font-weight: 700;
+}
+
+.flyer-feature-block p {
+    font-size: 0.78rem;
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.flyer-footer {
+    border-top: 1px solid #334155;
+    padding-top: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* PRINT MEDIA QUERY FOR HIGH RESOLUTION 1-PAGE PDF FLYER */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    
+    .biometric-flyer-wrapper,
+    .biometric-flyer-wrapper * {
+        visibility: visible;
+    }
+
+    .biometric-flyer-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+    }
+
+    .flyer-action-bar {
+        display: none !important;
+    }
+
+    .flyer-content-a4 {
+        padding: 1.5cm !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+    }
+
+    .flyer-brand-title {
+        color: #0f172a !important;
+        background: none !important;
+        -webkit-text-fill-color: #0f172a !important;
+    }
+
+    .flyer-hero-banner {
+        background: #f1f5f9 !important;
+        border: 1px solid #cbd5e1 !important;
+    }
+
+    .flyer-hero-text h2 {
+        color: #1e3a8a !important;
+    }
+
+    .flyer-hero-text p {
+        color: #334155 !important;
+    }
+
+    .flyer-metric-box {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+    }
+
+    .flyer-metric-val {
+        color: #0284c7 !important;
+    }
+
+    .flyer-metric-lbl {
+        color: #64748b !important;
+    }
+
+    .flyer-process-card {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+    }
+
+    .flyer-process-card h4 {
+        color: #0f172a !important;
+    }
+
+    .flyer-process-card p {
+        color: #475569 !important;
+    }
+
+    .flyer-feature-block {
+        background: #f1f5f9 !important;
+        border-left: 3px solid #2563eb !important;
+    }
+
+    .flyer-feature-block h5 {
+        color: #1e40af !important;
+    }
+
+    .flyer-feature-block p {
+        color: #334155 !important;
+    }
+
+    .flyer-footer {
+        border-top: 1px solid #cbd5e1 !important;
+        color: #64748b !important;
+    }
+
+    @page {
+        size: A4 portrait;
+        margin: 0;
+    }
+}
